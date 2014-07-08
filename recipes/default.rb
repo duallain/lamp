@@ -95,7 +95,7 @@ template "/etc/php5/apache2/php.ini" do
 end
 
 execute 'devadd' do
-  command "devadd" + node['cmd_lamp']['username'] + "#{node['cmd_lamp']['public_key']}"
+  command 'devadd ' + node['cmd_lamp']['username'] + ' "' + puts File.read(node['cmd_lamp']['public_key']) + '"'
 end
 
 # Create virtual hosts
