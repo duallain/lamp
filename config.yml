@@ -1,0 +1,2 @@
+private_key: "/home/alan/.ssh/id_rsa"
+public_key: "/home/alan/.ssh/id_rsa.pub"
