@@ -59,7 +59,7 @@ execute "npm install forever" do
   action :run
 end
 
-# Add templates and fix permissions
+# Add templates, fix permissions and add key
 
 template "/usr/local/bin/devadd" do
   source "devadd.erb"
@@ -94,8 +94,10 @@ template "/etc/php5/apache2/php.ini" do
   mode "0644"
 end
 
-execute 'devadd' do
-  command 'devadd ' + node['cmd_lamp']['username'] + ' "' + puts File.read(node['cmd_lamp']['public_key']) + '"'
+if !node['cmd_lamp']['public_key'].nil? && !node['cmd_lamp']['public_key'].empty?
+  execute 'devadd' do
+    command "devadd #{node['cmd_lamp']['username']} \"#{node['cmd_lamp']['public_key']}\""
+  end
 end
 
 # Create virtual hosts
