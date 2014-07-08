@@ -24,8 +24,6 @@ for r in recipes do
   include_recipe r
 end
 
-include_recipe "chef-composer"
-
 # Install packages and software
 
 packages = [
