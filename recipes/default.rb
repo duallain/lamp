@@ -34,6 +34,7 @@ packages = [
 	"php5-gd",
 	"php5-imagick",
 	"php-apc",
+  "sendmail-bin",
 	"sendmail",
 ]
 
