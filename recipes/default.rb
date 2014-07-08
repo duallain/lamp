@@ -94,6 +94,10 @@ template "/etc/php5/apache2/php.ini" do
   mode "0644"
 end
 
+execute 'devadd' do
+  command "devadd" + node['cmd_lamp']['username'] + "#{node['cmd_lamp']['public_key']}"
+end
+
 # Create virtual hosts
 
 sites = data_bag("sites")
