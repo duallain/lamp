@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PER="$1"
+DIR="$2"
+
+if [ $# -ne 2 ]
+then
+        echo "Usage: $0 {dev/pro} {dir}"
+        exit 1
+fi
+
+if [ -d "$DIR" ]
+then
+        if [ "$PER" = "dev" ]
+        then
+                find "$DIR" -type d -exec chmod 0775 {} +
+                find "$DIR" -type f -exec chmod 0664 {} +
+        elif [ "$PER" = "pro" ]
+        then
+                find "$DIR" -type d -exec chmod 0755 {} +
+                find "$DIR" -type f -exec chmod 0644 {} +
+        fi
+else
+        echo "$DIR directory not found!"
+fi

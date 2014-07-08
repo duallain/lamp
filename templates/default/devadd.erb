@@ -1,0 +1,19 @@
+#!/bin/bash
+
+USER="$1"
+KEY="$2"
+
+if [ $# -ne 2 ]
+then
+        echo "Usage: $0 {user} {key}"
+        exit 1
+fi
+
+useradd -d /home/"$USER" -s /bin/bash -m "$USER"
+mkdir /home/"$USER"/.ssh
+echo "$KEY" >> /home/"$USER"/.ssh/authorized_keys
+chmod 600 /home/"$USER"/.ssh/authorized_keys
+chown -R "$USER":"$USER" /home/"$USER"/.ssh
+usermod -a -G www-data "$USER"
+echo "$USER ALL = NOPASSWD : ALL" >> /etc/sudoers
+echo "umask 002" >> /home/"$USER"/.bashrc
